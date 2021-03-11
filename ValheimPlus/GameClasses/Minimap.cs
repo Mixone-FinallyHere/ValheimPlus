@@ -58,7 +58,8 @@ namespace ValheimPlus.GameClasses
     [HarmonyPatch(typeof(Minimap), "Awake")]
     public static class MinimapAwake
     {
-        private static void Postfix()
+        public static bool devMode = true;
+        private static void Postfix(ref Minimap __instance)
         {
             if (ZNet.m_isServer)
             {
@@ -91,6 +92,15 @@ namespace ValheimPlus.GameClasses
                         }
                     }
                 }*/
+            }
+            if(devMode)
+            {
+                Transform nameField = Helper.GetChildComponentByName<Transform>("NameField", __instance.m_largeRoot); 
+                GameObject iconPanel = Helper.GetChildComponentByName<Transform>("IconPanel", __instance.m_largeRoot).gameObject;
+                nameField.SetParent(iconPanel.transform);
+                RectTransform iconPanelRect = iconPanel.GetComponent<RectTransform>();
+                iconPanelRect.sizeDelta = new Vector2(500, 400);
+                Helper.GetChildComponentByName<Transform>("Bkg", iconPanel).gameObject.SetActive(false);
             }
         }
     }

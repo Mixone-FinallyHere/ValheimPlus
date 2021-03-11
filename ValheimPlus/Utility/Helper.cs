@@ -125,6 +125,17 @@ namespace ValheimPlus
             return validContainers;
         }
 
+        public static T GetChildComponentByName<T>(string name, GameObject objected) where T : Component
+        {
+            foreach (T component in objected.GetComponentsInChildren<T>(true))
+            {
+                if (component.gameObject.name == name)
+                {
+                    return component;
+                }
+            }
+            return null;
+        }
 
 
     }
