@@ -513,8 +513,11 @@ namespace ValheimPlus.GameClasses
             {
                 if (Configuration.Current.Player.IsEnabled)
                 {
-                    __instance.m_guardianSE.m_ttl = Configuration.Current.Player.guardianBuffDuration;
-                    __instance.m_guardianSE.m_cooldown = Configuration.Current.Player.guardianBuffCooldown;
+                    if (__instance.m_guardianSE)
+                    {
+                        __instance.m_guardianSE.m_ttl = Configuration.Current.Player.guardianBuffDuration;
+                        __instance.m_guardianSE.m_cooldown = Configuration.Current.Player.guardianBuffCooldown;
+                    }
                 }
             }
         }
