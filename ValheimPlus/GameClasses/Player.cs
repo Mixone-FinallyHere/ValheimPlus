@@ -180,7 +180,7 @@ namespace ValheimPlus.GameClasses
             Player.m_localPlayer.ShowTutorial("vplus");
 
             //Only sync on first spawn
-            if (VPlusMapSync.ShouldSyncOnSpawn)
+            if (VPlusMapSync.ShouldSyncOnSpawn && Configuration.Current.Map.IsEnabled && Configuration.Current.Map.shareMapProgression)
             {
                 //Send map data to the server
                 VPlusMapSync.SendMapToServer();
@@ -280,7 +280,7 @@ namespace ValheimPlus.GameClasses
             if (Configuration.Current.StaminaUsage.IsEnabled)
             {
                 string methodName = new StackTrace().GetFrame(2).GetMethod().Name;
-                if (methodName.Equals(nameof(Player.UpdatePlacement)) || methodName.Equals(nameof(Player.Repair)))
+                if (methodName.Contains(nameof(Player.UpdatePlacement)) || methodName.Contains(nameof(Player.Repair)) || methodName.Contains(nameof(Player.RemovePiece)))
                 {
                     string itemName = __instance.GetRightItem()?.m_shared.m_name;
                     if (itemName == "$item_hammer")
