@@ -501,9 +501,9 @@ namespace ValheimPlus.GameClasses
             {
                 m_repair_count += repaired;
             }
-        }        
+        }
     }
-
+    
     /// <summary>
     /// Configures guardian buff duration and cooldown
     /// </summary>
@@ -515,11 +515,12 @@ namespace ValheimPlus.GameClasses
             if (Configuration.Current.Player.IsEnabled)
             {
                 if (__instance.m_guardianSE)
+
                 {
                     __instance.m_guardianSE.m_ttl = Configuration.Current.Player.guardianBuffDuration;
                     __instance.m_guardianSE.m_cooldown = Configuration.Current.Player.guardianBuffCooldown;
                 }
             }
         }
-    }
+    }    
 }
